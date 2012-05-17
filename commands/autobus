@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+require 'mechanize'
+
+@now = Time.now
+@address = 'http://www2.stm.info/horaires/frmResult.aspx?Langue=Fr'
+@stops = ['53211', '53227']
+@filter = {'34' => 'ouest', '29' => 'est'}
+
+@agent = Mechanize.new do |agent|
+  agent.user_agent_alias = 'Mac Safari'
+end
+
+def display_results
+  @stops.each do |stop| 
+    @agent.get(@address) do |page|
+      result = page.form { |form| form.txtArret = stop }.submit
+      trs = result.search('#webGrille tr').select do |tr| 
+        line =  tr.css('td:nth-child(2)').text 
+        direction = tr.css('td:nth-child(3)').text.downcase
+
+        @filter.any?{|k,v| k == line && v == direction }  
+      end
+ 
+      trs = trs.map do |tr|
+        line = tr.css('td:nth-child(2)').first.text
+        hours = tr.css('td').drop(3).take(2)
+          .map{|td| td.text }
+        direction = tr.css('td:nth-child(3)')
+          .text.downcase
+
+        [line, direction, hours]
+      end
+
+      trs.sort_by{|tr| tr[2].first }
+        .each{|tr| yield tr[0], tr[1], tr[2] }
+    end
+  end
+end
+
+def cute_time(input)
+  split = input.split('h')
+  hour = split.first.to_i
+  min = split.last.to_i
+
+  time = Time.new(@now.year, @now.month, @now.day, hour, min)
+  difference = ((time - @now) / 60).round
+  
+  "#{input} (#{difference} min)" 
+end
+
+puts "\n"
+puts "====== AUTOBUS ====== #{@now.strftime('%Hh%M')} "
+puts "\n"
+
+display_results do |line, direction,  hours|
+  hours = hours.map { |h|  cute_time h }.join(', ')
+  puts "Ligne #{line} #{direction}: #{hours}." 
+end
+puts "\n"
