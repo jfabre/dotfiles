@@ -15,7 +15,17 @@ function show_history {
   head
 }
 function edit_alias {
-  subl -n -w ~/dev/dotfiles/bash/aliases && . ~/dev/dotfiles/bash/aliases
+  SOURCE="${BASH_SOURCE[0]}"
+  DIR="$( dirname "$SOURCE" )"
+  while [ -h "$SOURCE" ]
+  do 
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+    DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd )"
+  done
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+  subl -n -w $DIR/aliases && . $DIR/aliases
 }
 
 PS1='\u@\h \[\033[1;33m\]\w\[\033[0m\]$(parse_git_branch)$ '

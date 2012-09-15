@@ -1,6 +1,7 @@
 export PATH=$PATH:$HOME/dev/dotfiles/commands
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/bin # Adds anything in bin to PATH
+PATH=$PATH:/Applications/Xcode.app/Contents/Developer
 
 export EDITOR="subl -n"
 

@@ -3,16 +3,17 @@
 
 #rails
 alias rs='rails server'
+alias ss='./script/server'
 alias rg='rails generate' 
 alias r='be rake'
 alias mig='r db:migrate && r db:test:prepare'
-
 #gem files
 alias gi='gem install'
 
 #adding aliases for bundle
 alias be='bundle exec'
 alias bi='bundle install'
+alias bu='bundle update'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -43,6 +44,8 @@ alias gps='git push'
 alias gc='git commit .'
 alias gck='git checkout'
 alias ga='git add .'
+
+
 alias ..='cd ..'
 alias sh="show_history"
 alias ea="edit_alias"
