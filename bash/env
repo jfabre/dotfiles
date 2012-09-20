@@ -10,9 +10,15 @@ export EDITOR="subl -n"
 #export TRACKMAN_URL=https://99ea9780cab0012f665a12313b030732:99eabc30cab0012f665a12313b030732@trackman-server.herokuapp.com/heroku/resources/476
 
 
-export TRACKMAN_ERROR_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/1/public/503-error.html?1345596426
-export TRACKMAN_MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/1/public/503.html?1345596426
-export TRACKMAN_URL=http://d201b0b0ce20012f6a8138f6b11b47e3:d201b420ce20012f6a8138f6b11b47e3@127.0.0.1:3000/heroku/resources/1
+#training crew
+export TRACKMAN_ERROR_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/526/public/503-error.html?1347835810
+export TRACKMAN_MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/526/public/503.html?1347835811
+export TRACKMAN_URL=https://cb4f8580e27e012f6bac38f6b11b47e3:cb4f88a0e27e012f6bac38f6b11b47e3@127.0.0.1:3000/heroku/resources/526
+
+#burndown charts
+#export TRACKMAN_ERROR_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/1/public/503-error.html?1345596426
+#export TRACKMAN_MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/1/public/503.html?1345596426
+#export TRACKMAN_URL=http://d201b0b0ce20012f6a8138f6b11b47e3:d201b420ce20012f6a8138f6b11b47e3@127.0.0.1:3000/heroku/resources/1
 
 export S3_KEY=AKIAJBP5V5HBU2UHKZ3Q
 export S3_SECRET=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
