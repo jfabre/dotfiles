@@ -21,17 +21,10 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls -l --color=auto'
-  alias dir='dir --color=auto'
-  alias vdir='vdir --color=auto'
-
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
+#rubygems
+alias gi='gem install'
+alias gup='gem update'
+alias gun='gem uninstall'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -48,10 +41,13 @@ alias gl='git smart-log'
 alias gpl='git smart-pull'
 alias gps='git push'
 alias gc='git commit'
-alias gck='git checkout'
+alias gch='git checkout'
 alias ga='git add'
 alias gb='git branch'
-
+alias gs='git stash'
+alias gsp='git stash pop'
+alias gm='git merge'
+alias gr='git rebase'
 
 alias ..='cd ..'
 alias sh="show_history"
