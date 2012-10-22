@@ -5,21 +5,6 @@ PATH=$PATH:/Applications/Xcode.app/Contents/Developer
 
 export EDITOR="subl -n"
 
-#export TRACKMAN_ERROR_PAGE_URL=http://s3.amazonaws.com/trackman-bucket/476/public/503-error.html?1345218374
-#export TRACKMAN_MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/trackman-bucket/476/public/503.html?1345218374
-
-#training crew
-export TRACKMAN_ERROR_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/526/public/503-error.html?1347835810
-export TRACKMAN_MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/526/public/503.html?1347835811
-export TRACKMAN_URL=http://cb4f8580e27e012f6bac38f6b11b47e3:cb4f88a0e27e012f6bac38f6b11b47e3@127.0.0.1:3000/heroku/resources/526
-
-#burndown charts
-#export TRACKMAN_ERROR_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/1/public/503-error.html?1345596426
-#export TRACKMAN_MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/test-trackman-bucket/1/public/503.html?1345596426
-#export TRACKMAN_URL=http://d201b0b0ce20012f6a8138f6b11b47e3:d201b420ce20012f6a8138f6b11b47e3@127.0.0.1:3000/heroku/resources/1
-
 export S3_BUCKET=test-trackman-bucket
 export TRACKMAN_SERVER_URL=127.0.0.1:3000
-
-#TRACKMAN_URL=http://2ffd0620b697012fff773499baf58ab9:2ffd09e0b697012fff773499baf58ab9@127.0.0.1:3000/heroku/resources/253
 

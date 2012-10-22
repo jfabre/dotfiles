@@ -7,7 +7,8 @@ alias ss='./script/server'
 alias sg='./script/generate'
 alias rg='rails generate' 
 alias r='rake'
-alias mig='r db:migrate && r db:test:prepare'
+alias rr='rake release'
+alias rdm='r db:migrate && r db:test:prepare'
 #gem files
 alias gi='gem install'
 
@@ -37,7 +38,7 @@ alias tm='top -o vsize'
 
 # git
 alias g="git status"
-alias gl='git smart-log'
+alias gl='git smart-log -n 10'
 alias gpl='git smart-pull'
 alias gps='git push'
 alias gc='git commit'
