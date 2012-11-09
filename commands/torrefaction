@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+require 'mechanize'
+require "highline/import"
+
+if ARGV.any? { |a| a == '--help' }
+  puts "Write a name to search. Ex: torrefaction \"Dexter s04e01-12\""
+  puts "It will list the most seed for each."
+  puts "You get to choose which one you want and then it starts the download"
+  exit
+end
+def get_torrents(page, query)
+  result = page.form { |form| form.q = query }.submit
+  result.search('#searchResult tr').drop(1).map do |tr|
+    name = tr.css('td:nth-child(2) .detName').text.strip
+    seeder = tr.css('td:nth-child(3)').text.to_i
+    magnet = tr.css('td:nth-child(2) > a:first').first.attributes['href'].value
+    
+    {name: name, seed: seeder, magnet: magnet}
+  end
+end
+
+def parse(arg)
+  if arg.include? '-'
+    sequence = arg.match(/\d+\-\d+/)[0]
+      .split('-')
+      .select{|x| x.to_i }
+    
+    (sequence[0]..sequence[1]).map { |n| arg.sub(/\d+\-\d+/, n) }
+  else
+    [arg]
+  end
+end
+
+def choose_over(torrents)
+  choice = choose do |menu|
+    menu.prompt = "Which one?"  
+    torrents.select{|t| t[:seed] > 0 }
+      .each{|t| menu.choice("(#{t[:seed]}) #{t[:name]}}") }
+    menu.choice('Not interested!')
+  end
+  torrents.select{|t| choice.include?(t[:name]) }.first
+end
+@agent = Mechanize.new do |agent|
+  agent.user_agent_alias = 'Mac Safari'
+end
+
+@download = []
+@agent.get('http://www.thepiratebay.se') do |page|  
+  args = ARGV.map{|a| parse(a) }.flatten
+  args.each do |a|
+    torrents = get_torrents(page, a)
+      .sort_by{|t| t[:seed]}
+      .reverse
+
+    if torrents.any?
+      puts "--------------------------"
+      t = choose_over torrents
+      @download << t unless t.nil?
+    end
+  end
+end
+
+#we reverse because the last becomes the first popup to click on..
+@download.reverse.each do |d|
+  `open #{d[:magnet]}`
+end
+
