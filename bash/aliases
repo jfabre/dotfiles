@@ -6,9 +6,9 @@ alias rs='rails server'
 alias ss='./script/server'
 alias sg='./script/generate'
 alias rg='rails generate' 
-alias r='rake'
+alias r='bundle exec rake'
 alias rr='rake release'
-alias rdm='r db:migrate && r db:test:prepare'
+alias rdm='bundle exec rake db:migrate && bundle exec rake db:test:prepare'
 #gem files
 alias gi='gem install'
 

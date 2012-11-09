@@ -12,5 +12,3 @@ source $DIR/bash/env
 source $DIR/bash/secret_env
 source $DIR/bash/config
 source $DIR/bash/aliases
-
-PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
