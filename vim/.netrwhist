@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/jeremy/dev/config-store-client'
+let g:netrw_dirhist_2='/Users/jeremy/dev/Burndown-charts'
+let g:netrw_dirhist_3='/Users/jeremy/dev/config-store-client'
+let g:netrw_dirhist_4='/Users/jeremy/dev/config-store-server'
+let g:netrw_dirhist_5='/Users/jeremy/dev/config-store-client'
+let g:netrw_dirhist_6='/Users/jeremy/dev/Burndown-charts'
+let g:netrw_dirhist_7='/Users/jeremy/dev/dotfiles/bash'
+let g:netrw_dirhist_8='/Users/jeremy/dev/dotfiles'
