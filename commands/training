@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require 'mechanize'
+require 'awesome_print'
+
+@address = 'http://www.extremeevolution.ca/classes.html'
+
+@agent = Mechanize.new do |agent|
+  agent.user_agent_alias = 'Mac Safari'
+end
+
+
+str = ""
+@agent.get(@address) do |page|
+  page.search('.txt h5').each do |node|
+    str << "\n" + node.inner_html + "\n"
+  end
+end
+
+
+a = str.gsub("\u00A0", "")
+  .gsub(/\<\/?[a-z]+[^\>]*\>/, ' ')
+  .split(/[\ \n\-]+/)
+  .flatten
+  .map(&:strip)
+  .select{|x| x.length > 0 }
+
+ap a
+#array = .map(&:strip).reduce([]) do |memo, x|
+#  if x == '-'
+
+
+#  else
+#  end
+
+#end

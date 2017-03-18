@@ -13,18 +13,9 @@ function show_history {
   head
 }
 
-function edit_alias {
-  SOURCE="${BASH_SOURCE[0]}"
-  DIR="$( dirname "$SOURCE" )"
-  while [ -h "$SOURCE" ]
-  do 
-    SOURCE="$(readlink "$SOURCE")"
-    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-    DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd )"
-  done
-  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-
-  subl -n -w $DIR/aliases && . $DIR/aliases
+function edit_alias() {
+  EADIR="$( dirname "$SOURCE" )"
+  mvim -f "$EADIR/bash/aliases" && . $EADIR/bash/aliases
 }
 
 function rvm_version {
@@ -36,17 +27,42 @@ function rvm_version {
   [ "$full" != "" ] && echo "$full"
 }
 
-function cd {
-  builtin cd "$@"  
-  configstore
+export MARKPATH=$HOME/.marks
+function jump { 
+    cd -P $MARKPATH/$1 2>/dev/null || echo "No such mark: $1"
 }
-function configstore {
-  if [ -f '.config-store' ]; then 
-    eval `config-store export`  
-  fi
+function mark { 
+    mkdir -p $MARKPATH; ln -s $(pwd) $MARKPATH/$1
 }
-function ff {
- grep -H -r "$@" ./ --exclude=*.{git,log} --exclude=\.git --exclude=tmp
+function unmark { 
+    rm -i $MARKPATH/$1 
 }
-PS1='⚡  $(rvm_version) \[\033[1;33m\]\w\[\033[0m\] $(parse_git_branch)  '
+function marks {
+    ls -l $MARKPATH | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\ -/g' && echo
+}
+
+function play {
+  # Skip DASH manifest for speed purposes. This might actually disable
+  # being able to specify things like 'bestaudio' as the requested format,
+  # but try anyway.
+  # Get the best audio that isn't WebM, because afplay doesn't support it.
+  # Use "$*" so that quoting the requested song isn't necessary.
+  youtube-dl --default-search=ytsearch: \
+                              --youtube-skip-dash-manifest \
+                              --output="${TMPDIR:-/tmp/}%(title)s-%(id)s.%(ext)s" \
+                              --restrict-filenames \
+                              --format="bestaudio[ext!=webm]" \
+                              --exec=afplay "$*"
+}
+
+function mp3 {
+  # Get the best audio, convert it to MP3, and save it to the current
+  # directory.
+  youtube-dl --default-search=ytsearch: \
+                              --restrict-filenames \
+                              --format=bestaudio \
+                              --extract-audio \
+                              --audio-format=mp3 \
+                              --audio-quality=1 "$*"
+}
 

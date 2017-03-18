@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require "highline/import"
+dir = Dir.new(Dir.pwd)
+
+def convert_and_remove(file)
+  if file.end_with? '.css'
+    new_name = "#{file}.sass"
+  else
+    new_name = file.gsub(/scss$/, 'sass')
+  end
+  if system("sass-convert #{file} #{new_name}")
+    raise 'arg!' unless system("rm #{file}")
+  else
+    raise 'arg!'
+  end
+end
+
+files = dir.select{|f| ['css', 'scss'].any?{|s| f.end_with? s } }
+files.each do |f|
+  choose do |menu|
+    menu.prompt = "Convert #{f}?"
+    menu.choice(:yes) { convert_and_remove(f); say('done!') }
+    menu.choice(:no) { say("skipped #{f}") }
+  end
+  puts "---------------\n"
+end

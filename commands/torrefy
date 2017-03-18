@@ -1,0 +1,212 @@
+#!/usr/bin/env ruby
+require 'mechanize'
+require 'highline/import'
+require 'awesome_print'
+require 'eventmachine'
+
+class Object
+  def try *a, &b
+    begin 
+      send(*a, &b)
+    rescue NoMethodError
+      nil
+    end
+  end
+end
+
+class String
+  def wrap(width=78)
+    gsub(/(.{1,#{width}})(\s+|\Z)/, "\\1\n   ")
+  end
+end
+
+class Array
+  def async_map(&block)
+    return self if length == 0
+
+    results = nil
+    EventMachine.run do
+      operation = proc { |item, iter|
+        EventMachine.defer(proc { block.call(item) }, proc { |r| iter.return(r) })
+      }
+      callback = proc { |rs|
+        results = rs
+        EventMachine.stop
+      }
+      EventMachine::Iterator.new(self, length).map(operation, callback)
+    end
+    results
+  end
+end
+
+class Torrefy
+  def initialize args
+    @site = 'http://thepiratebay.se'
+    @download = []
+    @torrents = []
+
+    current = :main
+    @args = args.reduce({ main: [] }) do |sum, a|
+      if a[0] == '-'      
+        current = case a
+          when '-s', '--season'
+            :season
+          when '-e', '--episode', '--episodes'
+            :episode
+          when '-hd', '--hd'
+            :hd
+          when '-m', '--movie', '--movies'
+            :movie
+          when '-h', '--help'
+            :help
+          when '-c', '--count'
+            :count
+          else
+            :main
+        end
+        sum[current] ||= []
+      elsif current == :count
+        sum[current] << a.to_i
+      else
+        sum[current] << a
+      end
+      sum
+    end
+
+    @agent = Mechanize.new do |agent|
+      agent.user_agent_alias = 'Mac Safari'
+    end
+  end
+
+  def run
+    help
+
+    if @args.keys.include? :movie
+      @agent.get("#{@site}/browse/201/0/7/0") do |page|  
+        @torrents << torrents(page, description: true)
+      end
+    elsif @args.keys.include? :hd
+      @agent.get("#{@site}/browse/207/0/7/0") do |page|  
+        @torrents << torrents(page, description: true)
+      end
+    elsif @args.keys.include? :episode
+      @agent.get(@site) do |page|  
+        @torrents = episodes.map do |e|
+          torrents(page.form{ |f| f.q = "#{main} s#{season}e#{e}" }.submit)
+        end
+      end
+    elsif @args.keys.include? :season
+      @agent.get(@site) do |page|  
+        @torrents << torrents(page.form{ |f| f.q = "#{main} s#{season}*" }.submit)
+      end
+    else
+      @agent.get(@site) do |page|  
+        @torrents << torrents(page.form{ |f| f.q = main }.submit)
+      end
+    end
+
+    if @torrents.any?
+      @torrents.each do |torrents|
+        t = choose_over torrents
+        @download << t unless t.nil?
+      end
+    else
+      puts 'nothing found'
+    end
+
+    @download.each do |d|
+      `open #{d[:magnet]}`
+    end
+  end
+
+  protected
+    def count
+      @count ||= if @args.keys.include? :count
+        @args[:count][0]
+      elsif [:movie, :hd].any?{|k| @args.keys.include? k } 
+        20
+      else
+        5
+      end
+    end
+
+    def main
+      @main ||= @args[:main].join(' ') 
+    end
+    def season
+      @season ||= Integer(@args[:season][0]).to_s.rjust(2, '0')
+    end
+    def episodes
+      @episodes ||= if @args[:episode][0] =~ /\d+-\d+/
+        Range.new(*@args[:episode][0].split('-').map{|b| Integer(b).to_s.rjust(2, '0') }).to_a
+      else
+        [Integer(@args[:episode][0]).to_s.rjust(2, '0')]
+      end
+    end
+
+  private 
+    def torrents(page, description: false)
+      torrents = (page.search('#searchResult tr')[1..count] || []).to_a.async_map do |tr|
+        name = tr.css('td:nth-child(2) .detName').text.strip
+        seeder = tr.css('td:nth-child(3)').text.to_i
+        link = tr.css('td:nth-child(2) > a:first').first
+        magnet = link.attributes['href'].value
+
+
+        putc '.' unless description
+        { name: name, seed: seeder, magnet: magnet }
+      end.sort_by{ |t| t[:seed] }.reverse.take(count)
+
+      if description
+        torrents = torrents.async_map do |t|
+          details = page.link_with(text: t[:name]).click
+          imdb = details.link_with(text: 'IMDB').try(:click)
+
+          if imdb
+            rating = imdb.search('.star-box-details strong span[itemprop="ratingValue"]').text.strip.to_f
+            desc = imdb.search('p[itemprop="description"]').text.strip
+            actors = imdb.search('.txt-block[itemtype="http://schema.org/Person"] a[itemprop="url"] span[itemprop="name"]')
+              .map{ |a| a.text.strip }
+              .uniq.take(3)
+            
+            t[:description] = { rating: rating, desc: desc, actors: actors }
+          end
+          putc '.'
+          t
+        end
+      end
+      torrents
+    end
+
+    def help
+      if @args.keys.include? :help
+        puts "Write a name to search. Ex: torrefy Dexter s04e01-12"
+        puts "It will list the most seed for each."
+        puts "You get to choose which one you want and then it starts the download"
+        exit
+      end
+    end
+
+    def choose_over(torrents)
+      puts "\n"
+      choice = choose do |menu|
+        menu.prompt = "Which one?"  
+        torrents.select{|t| t[:seed] > 0 }.each do |t|
+          text = "#{t[:name]}} (#{t[:seed]})"
+          desc = t[:description]
+          if desc
+            text << %{
+   #{desc[:actors].join(', ')}
+   #{desc[:rating]}
+
+   #{desc[:desc].wrap}}
+          end
+          menu.choice(text) 
+        end
+        menu.choice('Not interested!')
+      end
+      torrents.detect{|t| choice.include?(t[:name]) }
+    end
+end
+
+Torrefy.new(ARGV).run

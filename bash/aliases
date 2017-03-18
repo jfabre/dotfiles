@@ -2,17 +2,15 @@
 
 
 #rails
-alias rs='rails server'
+alias reload='source ~/.zshrc'
+alias rc='rails console'
+alias rs='bundle exec puma -C config/puma.rb'
 alias ss='./script/server'
 alias sg='./script/generate'
 alias rg='rails generate' 
 alias r='bundle exec rake'
-alias rr='rake release'
-alias rdm='bundle exec rake db:migrate && bundle exec rake db:test:prepare'
-
-#rvm
-alias rvm187='rvm use 1.8.7'
-alias rvm193='rvm use 1.9.3-perf'
+alias rr='rails release'
+alias rdm='rails db:migrate && rails db:migrate RAILS_ENV=test' 
 
 #adding aliases for bundle
 alias be='bundle exec'
@@ -35,7 +33,7 @@ alias tm='top -o vsize'
 
 # git
 alias g="git status"
-alias gl='git smart-log -n 10'
+alias gl='git smart-log -n 30'
 alias gpl='git smart-pull'
 alias gps='git push'
 alias gc='git commit'
@@ -46,7 +44,14 @@ alias gs='git stash'
 alias gsp='git stash pop'
 alias gm='git merge'
 alias gr='git rebase'
+alias gg='git grep'
 
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
 alias sh="show_history"
+alias j="jump"
 alias ea="edit_alias"
+
+
