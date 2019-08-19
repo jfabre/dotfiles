@@ -1,7 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/jeremy/dev/Burndown-charts'
-let g:netrw_dirhist_2='/Users/jeremy/dev/insight'
-let g:netrw_dirhist_3='/Users/jeremy/dev/ideas'
-let g:netrw_dirhist_4='/Users/jeremy/dev/search-engine'
-let g:netrw_dirhist_5='/Users/jeremy/dev/github/lib/github_api/request'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/home/jeremy/magic/merfolk/ug'
+let g:netrw_dirhist_2='/home/jeremy/magic/merfolk/uw'
