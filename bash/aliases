@@ -61,3 +61,4 @@ alias ea="edit_alias"
 alias clipboard='DISPLAY=:0 xclip -sel clip'
 
 alias deploy="cap production puma:stop && git push origin master && cap production deploy"
+alias nvim='~/nvim-osx64/bin/nvim'

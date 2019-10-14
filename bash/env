@@ -17,3 +17,10 @@ export RUBY_CONFIGURE_OPTS="--with-jemalloc"
 unsetopt nomatch
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+if ssh-add -l | grep -q "SHA256"; then
+    echo ssh identity found
+else
+    echo "Adding ssh identity..."
+    ssh-add -k
+fi
