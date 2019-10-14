@@ -5,7 +5,7 @@
 alias reload='source ~/.zshrc'
 alias rc='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so bundle exec rails console'
 alias rs='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so bundle exec rails server --port 5000'
-alias sk='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m critical=5,default=3,low=10'
+alias sk='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start'
 alias sk2='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=2'
 alias sk3='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=3'
 alias sk4='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=4'
@@ -59,3 +59,5 @@ alias sh="show_history"
 alias j="jump"
 alias ea="edit_alias"
 alias clipboard='DISPLAY=:0 xclip -sel clip'
+
+alias deploy="cap production puma:stop && git push origin master && cap production deploy"

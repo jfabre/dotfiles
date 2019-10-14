@@ -1,7 +1,7 @@
 export PATH=$PATH:$HOME/dev/dotfiles/commands
-PATH=$PATH:$HOME/bin # Adds anything in bin to PATH
 PATH=$PATH:/usr/libexec/java_home
 PATH=/usr/local/bin:$PATH
+PATH=$HOME/bin:$PATH
 
 # setup the environment variables in order to install ots
 
