@@ -1,8 +1,6 @@
-
-
+alias reload='source ~/.zshrc'
 
 #rails
-alias reload='source ~/.zshrc'
 alias rc='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so bundle exec rails console'
 alias rs='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so bundle exec rails server --port 5000'
 alias sk='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start'
@@ -37,7 +35,7 @@ alias tu='top -o cpu'
 alias tm='top -o vsize'
 
 # git
-alias g="git status"
+alias g='git status'
 alias gl='git smart-log -n 30'
 alias gpl='git smart-pull'
 alias gps='git push'
@@ -55,10 +53,35 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-alias sh="show_history"
-alias j="jump"
-alias ea="edit_alias"
+alias sh='show_history'
+alias j='jump'
+alias ea='edit_alias'
 alias clipboard='DISPLAY=:0 xclip -sel clip'
 
-alias deploy="cap production puma:stop && git push origin master && cap production deploy"
+alias deploy='cap production puma:stop && git push origin master && cap production deploy'
 alias nvim='~/nvim-osx64/bin/nvim'
+alias shopt='/Users/jeremy/dev/dotfiles/commands/shopt'
+
+alias de-nest='docker exec -it handydev_service-nest-backend-server_1'
+alias de-partners='docker exec -it handydev_service-nest-backend-server_1'
+alias de-handybook='docker exec -it handydev_handybook-server_1'
+
+alias be-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec'
+alias be-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec'
+alias be-handybook='docker exec -it handydev_handybook-server_1 bundle exec'
+
+alias rc-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rails console'
+alias rc-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rails console'
+alias rc-handybook='docker exec -it handydev_handybook-server_1 bundle exec rails console'
+
+alias bi-nest='docker exec -it handydev_service-nest-backend-server_1 bundle install'
+alias bi-partners='docker exec -it handydev_service-partners-backend-server_1 bundle install'
+alias bi-handybook='docker exec -it handydev_handybook-server_1 bundle install'
+
+alias logs-nest='docker logs handydev_service-nest-backend-server_1 --tail 50 -f'
+alias logs-partners='docker logs handydev_service-partners-backend-server_1 --tail 50 -f'
+alias logs-handybook="docker logs handydev_handybook-server_1 --tail 50 -f"
+
+alias spec-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rspec spec'
+alias spec-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rspec spec'
+alias spec-handybook='docker exec -it handydev_handybook-server_1 bundle exec rspec spec'

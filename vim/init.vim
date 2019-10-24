@@ -91,9 +91,10 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 :vnoremap pg :!psql jeremy -e -d codescout<CR>
 :vnoremap p2 :Shell psql jeremy -e
 
-set wildignore+=*/tmp/*,*/cache/*,*.so,*.swp,*.zip,*/data/*    " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_max_files=0
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -110,3 +111,9 @@ map <Leader>k <Plug>(easymotion-k)
 
 let g:vimrubocop_keymap = 0
 nmap <Leader>q :RuboCop<CR>
+
+" Deal with white spaces
+" set hls
+" let g:HLSpace = 1
+" let g:HLColorScheme = g:colors_name
+

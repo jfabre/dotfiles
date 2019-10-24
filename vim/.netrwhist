@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
-let g:netrw_dirhist_2='/home/jeremy/react_tutorial'
-let g:netrw_dirhist_1='/home/jeremy/dev/codescout/lib/github'
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/jeremy/dev/dotfiles/commands'
+let g:netrw_dirhist_3='/Users/jeremy/handydev/repos/service-nest-backend/app/services'
+let g:netrw_dirhist_2='/Users/jeremy/dev/dotfiles/vim/bundle/vim-rspec/plugin'
+let g:netrw_dirhist_1='/Users/jeremy/dev/dotfiles/vim/bundle/vim-rspec'
