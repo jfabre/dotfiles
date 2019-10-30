@@ -48,6 +48,7 @@ alias gsp='git stash pop'
 alias gm='git merge'
 alias gr='git rebase'
 alias gg='git grep'
+alias gsu='submodule foreach git pull origin master'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -82,6 +83,10 @@ alias logs-nest='docker logs handydev_service-nest-backend-server_1 --tail 50 -f
 alias logs-partners='docker logs handydev_service-partners-backend-server_1 --tail 50 -f'
 alias logs-handybook="docker logs handydev_handybook-server_1 --tail 50 -f"
 
-alias spec-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rspec spec'
-alias spec-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rspec spec'
-alias spec-handybook='docker exec -it handydev_handybook-server_1 bundle exec rspec spec'
+alias spec-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rspec'
+alias spec-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rspec'
+alias spec-handybook='docker exec -it handydev_handybook-server_1 bundle exec rspec'
+
+alias restart-nest='docker restart handydev_service-nest-backend-server_1'
+alias restart-partners='docker restart handydev_service-partners-backend-server_1'
+alias restart-handybook='docker restart handydev_handybook-server_1'

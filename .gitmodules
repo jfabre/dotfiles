@@ -55,3 +55,15 @@
 [submodule "vim/bundle/vim-rubocop"]
 	path = vim/bundle/vim-rubocop
 	url = git@github.com:ngmy/vim-rubocop.git
+[submodule "vim/bundle/ctrlp-cmatcher"]
+	path = vim/bundle/ctrlp-cmatcher
+	url = https://github.com/JazzCore/ctrlp-cmatcher.git
+[submodule "vim/autoload/cpsm"]
+	path = vim/autoload/cpsm
+	url = https://github.com/nixprime/cpsm.git
+[submodule "vim/bundle/cpsm"]
+	path = vim/bundle/cpsm
+	url = https://github.com/nixprime/cpsm.git
+[submodule "vim/bundle/fzf.vim"]
+	path = vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim

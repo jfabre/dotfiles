@@ -92,10 +92,25 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 :vnoremap p2 :Shell psql jeremy -e
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_max_files=0
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_follow_symlinks = 1
+" let g:ctrlp_max_files=0
+" let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
+" The Silver Searcher
+" if executable('ag')
+  " Use ag over grep
+"  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+"  let g:ctrlp_use_caching = 0
+" endif
+
+set rtp+=/usr/local/opt/fzf
+nnoremap <C-p> :Files<Cr>
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " `s{char}{char}{label}`
