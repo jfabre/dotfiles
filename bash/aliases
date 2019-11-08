@@ -64,29 +64,36 @@ alias nvim='~/nvim-osx64/bin/nvim'
 alias shopt='/Users/jeremy/dev/dotfiles/commands/shopt'
 
 alias de-nest='docker exec -it handydev_service-nest-backend-server_1'
-alias de-partners='docker exec -it handydev_service-nest-backend-server_1'
+alias de-partners='docker exec -it handydev_service-partners-backend-server_1'
 alias de-handybook='docker exec -it handydev_handybook-server_1'
+alias de-pp='docker exec -it handydev_service-partnerportal-backend-server_1'
 
 alias be-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec'
 alias be-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec'
 alias be-handybook='docker exec -it handydev_handybook-server_1 bundle exec'
+alias be-pp='docker exec -it handydev_service-partnerportal-backend-server_1 bundle exec'
 
 alias rc-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rails console'
 alias rc-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rails console'
 alias rc-handybook='docker exec -it handydev_handybook-server_1 bundle exec rails console'
+alias rc-pp='docker exec -it handydev_service-partnerportal-backend-server_1 bundle exec rails console'
 
 alias bi-nest='docker exec -it handydev_service-nest-backend-server_1 bundle install'
 alias bi-partners='docker exec -it handydev_service-partners-backend-server_1 bundle install'
 alias bi-handybook='docker exec -it handydev_handybook-server_1 bundle install'
+alias bi-pp='docker exec -it handydev_service-partnerportal-backend-server_1 bundle install'
 
 alias logs-nest='docker logs handydev_service-nest-backend-server_1 --tail 50 -f'
 alias logs-partners='docker logs handydev_service-partners-backend-server_1 --tail 50 -f'
 alias logs-handybook="docker logs handydev_handybook-server_1 --tail 50 -f"
+alias logs-pp='docker logs handydev_service-partnerportal-backend-server_1 --tail 50 -f'
 
-alias spec-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rspec'
-alias spec-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rspec'
-alias spec-handybook='docker exec -it handydev_handybook-server_1 bundle exec rspec'
+alias spec-nest='hdy run service-nest-backend-rspec'
+alias spec-partners='hdy run service-partners-backend-rspec'
+alias spec-handybook='hdy run handybook-rspec'
+alias spec-pp='hdy run service-partnerportal-backend-rspec'
 
 alias restart-nest='docker restart handydev_service-nest-backend-server_1'
 alias restart-partners='docker restart handydev_service-partners-backend-server_1'
 alias restart-handybook='docker restart handydev_handybook-server_1'
+alias restart-pp='docker restart handydev_service-partnerportal-backend-server_1'
