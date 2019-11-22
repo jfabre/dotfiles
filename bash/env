@@ -7,20 +7,14 @@ PATH=$HOME/bin:$PATH
 
 fpath=(~/.oh-my-zsh/completions $fpath)
 
-export EDITOR="vim"
-export GIT_EDITOR="vim"
-export PGTZ=UTC 
-#export RUBYOPT="--jit"
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
+export PGTZ=UTC
 export RUBY_CONFIGURE_OPTS="--with-jemalloc"
+export REDIS_URL="redis://redis-server:6379"
 
 # doesn't break when you use brackets
 unsetopt nomatch
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
-if ssh-add -l | grep -q "SHA256"; then
-    echo ssh identity found
-else
-    echo "Adding ssh identity..."
-    ssh-add -k
-fi

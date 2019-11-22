@@ -1,6 +1,10 @@
+if ! ssh-add -l | grep -q "SHA256";
+then
+  ssh-add -k
+fi
 
 function show_history {
-  history | 
+  history |
   awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' |
   sort -rn |
   head
@@ -11,24 +15,15 @@ function edit_alias() {
   nvim -f "$EADIR/bash/aliases" && . $EADIR/bash/aliases
 }
 
-function rvm_version {
-  local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
-  [ "$gemset" != "" ] && gemset="@$gemset"
-  local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
-  [ "$version" != "" ] && version="$version"
-  local full="$version$gemset"
-  [ "$full" != "" ] && echo "$full"
-}
-
 export MARKPATH=$HOME/.marks
-function jump { 
+function jump {
     cd -P $MARKPATH/$1 2>/dev/null || echo "No such mark: $1"
 }
-function mark { 
+function mark {
     mkdir -p $MARKPATH; ln -s $(pwd) $MARKPATH/$1
 }
-function unmark { 
-    rm -i $MARKPATH/$1 
+function unmark {
+    rm -i $MARKPATH/$1
 }
 function marks {
     ls -l $MARKPATH | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\ -/g' && echo
@@ -80,4 +75,3 @@ function mp3 {
                               --audio-format=mp3 \
                               --audio-quality=1 "$*"
 }
-

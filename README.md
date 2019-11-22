@@ -1,4 +1,4 @@
 dotfiles
 ========
 
-My toolset 
+My toolset

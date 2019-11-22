@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/jeremy/dev/dotfiles/bash'
 let g:netrw_dirhist_6='/Users/jeremy/handydev/repos/handybook/app'
 let g:netrw_dirhist_5='/Users/jeremy/handydev/repos/handybook'
 let g:netrw_dirhist_4='/Users/jeremy/dev/dotfiles/commands'

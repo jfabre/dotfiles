@@ -10,10 +10,10 @@ alias sk4='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m 
 alias sk5='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=5'
 alias ss='./script/server'
 alias sg='./script/generate'
-alias rg='rails generate' 
+alias rg='rails generate'
 alias r='bundle exec rake'
 alias rr='rails release'
-alias rdm='rails db:migrate' 
+alias rdm='rails db:migrate'
 
 #adding aliases for bundle
 alias be='bundle exec'
@@ -63,37 +63,29 @@ alias deploy='cap production puma:stop && git push origin master && cap producti
 alias nvim='~/nvim-osx64/bin/nvim'
 alias shopt='/Users/jeremy/dev/dotfiles/commands/shopt'
 
-alias de-nest='docker exec -it handydev_service-nest-backend-server_1'
-alias de-partners='docker exec -it handydev_service-partners-backend-server_1'
-alias de-handybook='docker exec -it handydev_handybook-server_1'
-alias de-pp='docker exec -it handydev_service-partnerportal-backend-server_1'
+typeset -A projects
+projects[nest]='handydev_service-nest-backend-server_1';
+projects[partners]='handydev_service-partners-backend-server_1';
+projects[handybook]='handydev_handybook-server_1';
+projects[pp]='handydev_service-partnerportal-backend-server_1';
+projects[admin]='handydev_service-admin-backend-server_1';
 
-alias be-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec'
-alias be-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec'
-alias be-handybook='docker exec -it handydev_handybook-server_1 bundle exec'
-alias be-pp='docker exec -it handydev_service-partnerportal-backend-server_1 bundle exec'
+for k in "${(@k)projects}"; do
 
-alias rc-nest='docker exec -it handydev_service-nest-backend-server_1 bundle exec rails console'
-alias rc-partners='docker exec -it handydev_service-partners-backend-server_1 bundle exec rails console'
-alias rc-handybook='docker exec -it handydev_handybook-server_1 bundle exec rails console'
-alias rc-pp='docker exec -it handydev_service-partnerportal-backend-server_1 bundle exec rails console'
+  de="de-$k"
+  be="be-$k"
+  rc="rc-$k"
+  bi="bi-$k"
+  logs="logs-$k"
 
-alias bi-nest='docker exec -it handydev_service-nest-backend-server_1 bundle install'
-alias bi-partners='docker exec -it handydev_service-partners-backend-server_1 bundle install'
-alias bi-handybook='docker exec -it handydev_handybook-server_1 bundle install'
-alias bi-pp='docker exec -it handydev_service-partnerportal-backend-server_1 bundle install'
-
-alias logs-nest='docker logs handydev_service-nest-backend-server_1 --tail 50 -f'
-alias logs-partners='docker logs handydev_service-partners-backend-server_1 --tail 50 -f'
-alias logs-handybook="docker logs handydev_handybook-server_1 --tail 50 -f"
-alias logs-pp='docker logs handydev_service-partnerportal-backend-server_1 --tail 50 -f'
+  alias $de="docker exec -it $projects[$k]"
+  alias $be="docker exec -it $projects[$k] bundle exec"
+  alias $rc="docker exec -it $projects[$k] bundle exec rails console"
+  alias $bi="docker exec -it $projects[$k] bundle install"
+  alias $logs="docker logs $projects[$k] --tail 100 -f"
+done
 
 alias spec-nest='hdy run service-nest-backend-rspec'
 alias spec-partners='hdy run service-partners-backend-rspec'
 alias spec-handybook='hdy run handybook-rspec'
 alias spec-pp='hdy run service-partnerportal-backend-rspec'
-
-alias restart-nest='docker restart handydev_service-nest-backend-server_1'
-alias restart-partners='docker restart handydev_service-partners-backend-server_1'
-alias restart-handybook='docker restart handydev_handybook-server_1'
-alias restart-pp='docker restart handydev_service-partnerportal-backend-server_1'

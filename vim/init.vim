@@ -55,16 +55,22 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 let mapleader = ","
 
+:nnoremap <leader>t    :tabnew<CR>
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
-nmap <Leader>e :call RunNearestSpec()<CR>
-nmap <Leader>r :call RunCurrentSpecFile()<CR>
-nmap <Leader>t :call RunAllSpecs()<CR>
-let g:rspec_runner = "os_x_iterm2"
+nnoremap <leader>f :GFiles --exclude-standard --others --cached<Cr>
+nnoremap <leader>g :Files<Cr>
+nnoremap <leader>d :DockerToolsToggle<Cr>
+nnoremap <leader>b :Merginal<Cr>
+
+"nmap <Leader>e :call RunNearestSpec()<CR>
+"nmap <Leader>r :call RunCurrentSpecFile()<CR>
+"nmap <Leader>t :call RunAllSpecs()<CR>
+" let g:rspec_runner = "os_x_iterm2"
 "if has("nvim")
 "  let g:rspec_command = "tabnew | term bundle exec rspec {spec}"
 "endif
-let g:rspec_command = "tabnew | bundle exec spring rspec {spec}"
+" let g:rspec_command = "tabnew | bundle exec spring rspec {spec}"
 
 nnoremap Q <nop>
 
@@ -73,6 +79,8 @@ nnoremap Q <nop>
 
 " not a good idea
 ":set shellcmdflag=-ic
+":set shell /usr/bin/zsh
+"
 function! s:ExecuteInShell(command)
   let command = join(map(split(a:command), 'expand(v:val)'))
   echo 'Execute ' . command . '...'
@@ -96,9 +104,6 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " MacOSX/Linux
 
 set rtp+=/usr/local/opt/fzf
-nnoremap <C-p> :GFiles --exclude-standard --others --cached<Cr>
-nnoremap <C-o> :Files<Cr>
-nnoremap <C-d> :DockerToolsToggle<Cr>
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -113,12 +118,7 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+let g:vimrubocop_rubocop_cmd = 'rubocop '
 let g:vimrubocop_config = '.rubocop.yml'
 let g:vimrubocop_keymap = 0
 nmap <Leader>q :RuboCop<CR>
-
-" Deal with white spaces
-" set hls
-" let g:HLSpace = 1
-" let g:HLColorScheme = g:colors_name
-
