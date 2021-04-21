@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+path = ARGV[0..-1].join("\\ ")
+system(%Q(scp jeremy@inside:"#{path}" tmp.png))
+system("open tmp.png")
+
+sleep 5
+`rm tmp.png`
+
+

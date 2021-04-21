@@ -79,3 +79,9 @@
 [submodule "vim/bundle/vim-fugitive"]
 	path = vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/bundle/vim-test"]
+	path = vim/bundle/vim-test
+	url = https://github.com/janko/vim-test
+[submodule "vim/bundle/vim-foldcomments"]
+	path = vim/bundle/vim-foldcomments
+	url = git://github.com/lkdjiin/vim-foldcomments.git

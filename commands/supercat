@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+user = 'lexop'
+command = 'cat'
+servers = %w[
+  rogue.lexop.com
+  blackwidow.lexop.com
+  wonderwoman.lexop.com
+  phoenix.lexop.com
+]
+path = '/home/lexop/apps/lexop/current/log/sidekiq.log'
+
+sshs = servers.map do |server|
+  tail = "\"#{command} #{path} | grep ':10'\""
+  "ssh #{user}@#{server} #{tail}"
+end.join(" & ")
+
+cmd = "{ #{sshs}; } > /dev/ttys012"
+
+puts cmd
+`#{cmd}`

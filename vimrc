@@ -55,7 +55,7 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 let mapleader = ","
 
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <Leader>v :tabedit $MYVIMRC<CR>
 
 nmap <Leader>e :call RunNearestSpec()<CR>
 nmap <Leader>r :call RunCurrentSpecFile()<CR>

@@ -6,4 +6,4 @@ source $DIR/bash/secret_env
 source $DIR/bash/config
 source $DIR/bash/aliases
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -1,19 +1,24 @@
 alias reload='source ~/.zshrc'
 
 #rails
-alias rc='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so bundle exec rails console'
-alias rs='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so bundle exec rails server --port 5000'
-alias sk='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start'
-alias sk2='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=2'
-alias sk3='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=3'
-alias sk4='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=4'
-alias sk5='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so foreman start -m all=5'
-alias ss='./script/server'
-alias sg='./script/generate'
+alias rc='bundle exec rails console'
+alias rs='SIDEKIQ_INLINE=false stop; overmind s'
+alias yi='yarn install'
 alias rg='rails generate'
 alias r='bundle exec rake'
 alias rr='rails release'
+alias rt='rails test'
+alias rt1='PARALLEL_WORKERS=1 rails test'
+alias rt2='PARALLEL_WORKERS=2 rails test'
+alias rt4='PARALLEL_WORKERS=4 rails test'
+alias rt6='PARALLEL_WORKERS=6 rails test'
+alias rt8='PARALLEL_WORKERS=8 rails test'
+alias rt10='PARALLEL_WORKERS=10 rails test'
+alias rts='PARALLEL_WORKERS=1 TEST_USE_FIXTURES=true HEADLESS=true rails test'
+alias ss='screenshot'
+
 alias rdm='rails db:migrate'
+alias rdr='rails db:rollback'
 
 #adding aliases for bundle
 alias be='bundle exec'
@@ -22,8 +27,8 @@ alias bu='bundle update'
 
 #rubygems
 alias gi='gem install'
-alias gup='gem update'
-alias gu='gem uninstall'
+alias gu='gem update'
+alias gun='gem uninstall'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -36,7 +41,7 @@ alias tm='top -o vsize'
 
 # git
 alias g='git status'
-alias gl='git smart-log -n 30'
+alias gl='git smart-log -n 50'
 alias gpl='git smart-pull'
 alias gps='git push'
 alias gc='git commit'
@@ -49,6 +54,8 @@ alias gm='git merge'
 alias gr='git rebase'
 alias gg='git grep'
 alias gsu='submodule foreach git pull origin master'
+alias gd='git diff'
+alias gdc='git diff --cached'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -60,7 +67,6 @@ alias ea='edit_alias'
 alias clipboard='DISPLAY=:0 xclip -sel clip'
 
 alias deploy='cap production puma:stop && git push origin master && cap production deploy'
-alias nvim='~/nvim-osx64/bin/nvim'
 alias shopt='/Users/jeremy/dev/dotfiles/commands/shopt'
 
 typeset -A projects
@@ -89,3 +95,21 @@ alias spec-nest='hdy run service-nest-backend-rspec'
 alias spec-partners='hdy run service-partners-backend-rspec'
 alias spec-handybook='hdy run handybook-rspec'
 alias spec-pp='hdy run service-partnerportal-backend-rspec'
+
+
+alias stg='bundle exec cap staging maintenance:start; bundle exec cap staging deploy; bundle exec cap staging maintenance:stop'
+alias demo='bundle exec cap demo deploy'
+alias prd='bundle exec cap production deploy'
+alias prd01='bundle exec cap production-01 deploy'
+alias prd02='bundle exec cap production-02 deploy'
+alias puma-relink='pkill -USR1 puma-dev; rm ~/.puma-dev/lexop; puma-dev link .'
+alias stop='spring stop; puma-dev -stop'
+
+
+alias tsla='ticker TSLA'
+alias ld='tail -f -n 100 ~/dev/lexop/log/development.log'
+alias lt='tail -f -n 100 ~/dev/lexop/log/test.log'
+alias rbc='git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubocop'
+
+alias ssho='ssh jeremy@outside'
+alias sshi='ssh jeremy@inside'
