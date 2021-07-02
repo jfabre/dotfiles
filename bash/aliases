@@ -61,41 +61,12 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-alias sh='show_history'
 alias j='jump'
 alias ea='edit_alias'
 alias clipboard='DISPLAY=:0 xclip -sel clip'
 
 alias deploy='cap production puma:stop && git push origin master && cap production deploy'
 alias shopt='/Users/jeremy/dev/dotfiles/commands/shopt'
-
-typeset -A projects
-projects[nest]='handydev_service-nest-backend-server_1';
-projects[partners]='handydev_service-partners-backend-server_1';
-projects[handybook]='handydev_handybook-server_1';
-projects[pp]='handydev_service-partnerportal-backend-server_1';
-projects[admin]='handydev_service-admin-backend-server_1';
-
-for k in "${(@k)projects}"; do
-
-  de="de-$k"
-  be="be-$k"
-  rc="rc-$k"
-  bi="bi-$k"
-  logs="logs-$k"
-
-  alias $de="docker exec -it $projects[$k]"
-  alias $be="docker exec -it $projects[$k] bundle exec"
-  alias $rc="docker exec -it $projects[$k] bundle exec rails console"
-  alias $bi="docker exec -it $projects[$k] bundle install"
-  alias $logs="docker logs $projects[$k] --tail 100 -f"
-done
-
-alias spec-nest='hdy run service-nest-backend-rspec'
-alias spec-partners='hdy run service-partners-backend-rspec'
-alias spec-handybook='hdy run handybook-rspec'
-alias spec-pp='hdy run service-partnerportal-backend-rspec'
-
 
 alias stg='bundle exec cap staging maintenance:start; bundle exec cap staging deploy; bundle exec cap staging maintenance:stop'
 alias demo='bundle exec cap demo deploy'
@@ -113,3 +84,4 @@ alias rbc='git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubo
 
 alias ssho='ssh jeremy@outside'
 alias sshi='ssh jeremy@inside'
+alias socat6060='sudo socat tcp-listen:80,reuseaddr,fork tcp:localhost:6060'

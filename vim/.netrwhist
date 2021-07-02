@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/jeremy/dev/lexop'
+let g:netrw_dirhist_9='/home/jeremy/dev/lexop/lib'
 let g:netrw_dirhist_8='/Users/jeremyfabre/docker'
 let g:netrw_dirhist_7='/'
 let g:netrw_dirhist_6='/Users/jeremyfabre/docker'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_4='/Users/jeremyfabre/docker'
 let g:netrw_dirhist_3='/Users/jeremyfabre/.puma-dev'
 let g:netrw_dirhist_2='/Users/jeremyfabre/dev/lexop/app/operations/invoices'
 let g:netrw_dirhist_1='/Users/jeremyfabre/dev/lexop/test'
-let g:netrw_dirhist_0='/Users/jeremyfabre/dev/lexop/test/policies'
-let g:netrw_dirhist_9='/Users/jeremyfabre/dotfiles/bash'

@@ -1,9 +1,9 @@
 export PATH=$PATH:$HOME/dev/dotfiles/commands
 PATH=$PATH:/usr/libexec/java_home
 PATH=/usr/local/bin:$PATH
-PATH=$HOME/bin:$PATH
 PATH=$PATH:/Users/jeremyfabre/Library/Python/2.7/bin
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+PATH=$HOME/bin:$PATH
 
 # node
 #PATH="/usr/local/n/versions/node/10.13.0/bin:$PATH"
@@ -34,3 +34,19 @@ export TEST_COVERAGE=false
 export TEST_SHOW_SLOW=false
 export TEST_REPORTER_SPEC=false
 export SIDEKIQ_INLINE=false
+
+export GOPATH=~/go
+export GO111MODULE=on
+
+export DATABASE_SOURCE="lexop_development"
+
+export DATABASE_DESTINATION='anon'
+export DATABASE_HOST='127.0.0.1'
+export DATABASE_PASSWORD='docker'
+export DATABASE_USERNAME='postgres'
+
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+  export TERM='xterm-256color'
+else
+  export TERM='xterm-color'
+fi
