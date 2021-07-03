@@ -22,6 +22,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-test/vim-test'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'rhysd/committia.vim'
 
 "Colors
 "
