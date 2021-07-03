@@ -1,100 +1,15 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
-
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf'
-Plug 'preservim/nerdcommenter'
-Plug 'ervandew/supertab'
-Plug 'vim-airline/vim-airline'
-Plug 'kchmck/vim-coffee-script'
-Plug 'kevinhui/vim-docker-tools'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-haml'
-
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
-Plug 'idanarye/vim-merginal'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-rails'
-Plug 'ngmy/vim-rubocop'
-Plug 'tpope/vim-surround'
-Plug 'vim-test/vim-test'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" Initialize plugin system
-call plug#end()
-
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-  },
-}
-EOF
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  indent = {
-    enable = true
-  }
-}
-EOF
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-}
-EOF
-
 syntax on
 filetype plugin on
 filetype plugin indent on
+
+" vim plug
+source ~/dotfiles/vim/plugins.vim
 
 " Or if you have Neovim >= 0.1.5
 if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-
-" colors codeschool
-" colors dusk
-" colors ekvoli
-" colors ir_black
-" colors jellybeans
- colors motus
-" colors Mustang
-" colors oceanblack
-" colors paradox
-" colors peaksea
-" colors solarized
-" colors synic
-" colors tir_black
-" colors Tomorrow-Night-Blue
-" colors Tomorrow-Night-Bright
-" colors Tomorrow-Night-Eighties
-" colors Tomorrow-Night
-" colors Tomorrow
-" colors wombat256mod
-" colors wombat256
-" colors xoria256
 
 set clipboard=unnamed
 set autoindent
@@ -114,16 +29,15 @@ set hlsearch
 set incsearch
 set nocompatible
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd! bufwritepost .vimrc source $MYVIMRC
-endif
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 let mapleader = ","
 
-:nnoremap <leader>t    :tabnew<CR>
+"au BufWritePost ~/dotfiles/vim/init.vim so $MYVIMRC
+
 nmap <leader>v :tabedit $MYVIMRC<CR>
+
+:nnoremap <leader>t    :tabnew<CR>
 
 nnoremap <leader>f :GFiles --exclude-standard --others --cached<Cr>
 nnoremap <leader>g :Files<Cr>
@@ -168,40 +82,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " MacOSX/Linux
 
 "set rtp+=/home/jeremy/bin/fzf
 
-function! s:update_fzf_colors()
-  let rules =
-  \ { 'fg':      [['Normal',       'fg']],
-    \ 'bg':      [['Normal',       'bg']],
-    \ 'hl':      [['Comment',      'fg']],
-    \ 'fg+':     [['CursorColumn', 'fg'], ['Normal', 'fg']],
-    \ 'bg+':     [['CursorColumn', 'bg']],
-    \ 'hl+':     [['Statement',    'fg']],
-    \ 'info':    [['PreProc',      'fg']],
-    \ 'prompt':  [['Conditional',  'fg']],
-    \ 'pointer': [['Exception',    'fg']],
-    \ 'marker':  [['Keyword',      'fg']],
-    \ 'spinner': [['Label',        'fg']],
-    \ 'header':  [['Comment',      'fg']] }
-  let cols = []
-  for [name, pairs] in items(rules)
-    for pair in pairs
-      let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
-      if !empty(name) && code > 0
-        call add(cols, name.':'.code)
-        break
-      endif
-    endfor
-  endfor
-  let s:orig_fzf_default_opts = get(s:, 'orig_fzf_default_opts', $FZF_DEFAULT_OPTS)
-  let $FZF_DEFAULT_OPTS = s:orig_fzf_default_opts .
-        \ empty(cols) ? '' : (' --color='.join(cols, ','))
-endfunction
-
-augroup _fzf
-  autocmd!
-  autocmd ColorScheme * call <sid>update_fzf_colors()
-augroup END
-
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
 nmap s <Plug>(easymotion-overwin-f2)
@@ -215,7 +95,6 @@ let g:vimrubocop_config = '.rubocop.yml'
 let g:vimrubocop_keymap = 0
 nmap <Leader>q :RuboCop<CR>
 
-
 :command -nargs=+ Gg execute 'silent Ggrep!' <q-args> | cw | redraw!
 
 autocmd FileType ruby,eruby
@@ -223,3 +102,5 @@ autocmd FileType ruby,eruby
       \ set foldexpr=getline(v:lnum)=~'^\\s*#'
 
 :2mat ErrorMsg '\%81v.'
+
+colors oceanblack
