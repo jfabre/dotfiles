@@ -39,8 +39,14 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 :nnoremap <leader>t    :tabnew<CR>
 
-nnoremap <leader>f :GFiles --exclude-standard --others --cached<Cr>
-nnoremap <leader>g :Files<Cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
+
+" nnoremap <leader>f :GFiles --exclude-standard --others --cached<Cr>
+" nnoremap <leader>g :Files<Cr>
 nnoremap <leader>d :DockerToolsToggle<Cr>
 nnoremap <leader>b :Merginal<Cr>
 nnoremap <leader>z :Git blame<Cr>
@@ -54,6 +60,8 @@ nnoremap Q <nop>
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
+
+let g:airline_section_b = ''
 
 " not a good idea
 ":set shellcmdflag=-ic
@@ -103,4 +111,4 @@ autocmd FileType ruby,eruby
 
 :2mat ErrorMsg '\%81v.'
 
-colors oceanblack
+colors Tomorrow-Night-Blue
