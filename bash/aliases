@@ -64,17 +64,15 @@ alias j='jump'
 alias ea='edit_alias'
 alias clipboard='DISPLAY=:0 xclip -sel clip'
 
-alias deploy='cap production puma:stop && git push origin master && cap production deploy'
 alias shopt='/Users/jeremy/dev/dotfiles/commands/shopt'
 
-alias stg='bundle exec cap staging maintenance:start; bundle exec cap staging deploy; bundle exec cap staging maintenance:stop'
-alias demo='bundle exec cap demo deploy'
-alias prd='bundle exec cap production deploy'
-alias prd01='bundle exec cap production-01 deploy'
-alias prd02='bundle exec cap production-02 deploy'
 alias puma-relink='pkill -USR1 puma-dev; rm ~/.puma-dev/lexop; puma-dev link .'
 alias stop='spring stop; puma-dev -stop'
 
+alias demo='az aks get-credentials --resource-group CanadaCentralStg --name lexop-stg-cc-aks01'
+alias prod='az aks get-credentials --resource-group lxp-pr-cac-rg --name lxp-pr-cac-aks'
+alias stg='az aks get-credentials --resource-group lxp-st-cac-rg --name lxp-st-cac-aks'
+alias pod='f() { kubectl exec --stdin --tty $1 -- /bin/sh };f'
 
 alias tsla='ticker TSLA'
 alias ld='tail -f -n 100 ~/dev/lexop/log/development.log'
@@ -84,3 +82,4 @@ alias rbc='git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubo
 alias ssho='ssh jeremy@outside'
 alias sshi='ssh jeremy@inside'
 alias socat6060='sudo socat tcp-listen:80,reuseaddr,fork tcp:localhost:6060'
+alias vimdiff='nvim -d'

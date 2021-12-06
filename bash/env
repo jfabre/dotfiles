@@ -3,7 +3,7 @@ PATH=$PATH:/usr/libexec/java_home
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:/Users/jeremyfabre/Library/Python/2.7/bin
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 # node
 #PATH="/usr/local/n/versions/node/10.13.0/bin:$PATH"

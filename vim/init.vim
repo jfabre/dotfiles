@@ -33,28 +33,28 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 let mapleader = ","
 
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 "au BufWritePost ~/dotfiles/vim/init.vim so $MYVIMRC
-
 nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>b :tabedit ~/.vim/plugins.vim<CR>
 
-:nnoremap <leader>t    :tabnew<CR>
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+tnoremap <Esc> <C-\><C-n>
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
 
-" nnoremap <leader>f :GFiles --exclude-standard --others --cached<Cr>
-" nnoremap <leader>g :Files<Cr>
 nnoremap <leader>d :DockerToolsToggle<Cr>
-nnoremap <leader>b :Merginal<Cr>
 nnoremap <leader>z :Git blame<Cr>
 
 let test#neovim#term_position = "vert topleft 120"
-nmap <Leader>e :TestNearest -strategy=neovim<CR>
-nmap <Leader>r :TestFile --fail-fast -strategy=neovim<CR>
-nmap <Leader>t :TestSuite --fail-fast -strategy=neovim<CR>
+" nmap <Leader>e :TestNearest -strategy=neovim<CR>
+" nmap <Leader>r :TestFile --fail-fast -strategy=neovim<CR>
+" nmap <Leader>t :TestSuite --fail-fast -strategy=neovim<CR>
 
 nnoremap Q <nop>
 
@@ -63,10 +63,12 @@ match OverLength /\%81v.\+/
 
 let g:airline_section_b = ''
 
-" not a good idea
-":set shellcmdflag=-ic
-":set shell /usr/bin/zsh
-"
+let b:ale_linters = ['eslint', 'rubocop']
+let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
+" Write this in your vimrc file
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_insert_leave = 0
+
 function! s:ExecuteInShell(command)
   let command = join(map(split(a:command), 'expand(v:val)'))
   echo 'Execute ' . command . '...'
@@ -105,10 +107,18 @@ nmap <Leader>q :RuboCop<CR>
 
 :command -nargs=+ Gg execute 'silent Ggrep!' <q-args> | cw | redraw!
 
-autocmd FileType ruby,eruby
-      \ set foldmethod=expr |
-      \ set foldexpr=getline(v:lnum)=~'^\\s*#'
+autocmd FileType ruby
+    \ set foldmethod=expr |
+    \ set foldexpr=getline(v:lnum)=~'^\\s*#'
 
 :2mat ErrorMsg '\%81v.'
 
-colors Tomorrow-Night-Blue
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    file_ignore_patterns = { ".git" }
+  }
+}
+EOF
+
+colors base16-rebecca
