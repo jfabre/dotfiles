@@ -8,7 +8,7 @@ function show_history {
 
 function edit_alias() {
   EADIR="$( dirname "$SOURCE" )"
-  nvim -f "$EADIR/bash/aliases" && . $EADIR/bash/aliases
+  nvim -f "$EADIR/dev/dotfiles/bash/aliases" && . $EADIR/dev/dotfiles/bash/aliases
 }
 
 export MARKPATH=$HOME/.marks
@@ -36,15 +36,9 @@ function start_agent {
 }
 
 # Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    #ps ${SSH_AGENT_PID} doesn't work under cywgin
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
-    }
-else
-    #start_agent;
-fi
+# just for macos, we don't care
+eval $(ssh-agent)
+ssh-add --apple-use-keychain ~/.ssh/id_rsa
 
 function play {
   # Skip DASH manifest for speed purposes. This might actually disable

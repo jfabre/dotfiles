@@ -1,15 +1,13 @@
-syntax on
 filetype plugin on
 filetype plugin indent on
 
 " vim plug
-source ~/dotfiles/vim/plugins.vim
+source ~/dev/dotfiles/vim/plugins.vim
 
 " Or if you have Neovim >= 0.1.5
 if (has("termguicolors"))
  set termguicolors
 endif
-syntax enable
 
 set clipboard=unnamed
 set autoindent
@@ -52,11 +50,23 @@ nnoremap <leader>d :DockerToolsToggle<Cr>
 nnoremap <leader>z :Git blame<Cr>
 
 let test#neovim#term_position = "vert topleft 120"
-nmap <silent> <leader>tt :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ta :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tg :TestVisit<CR>
+nmap <Leader>te :TestNearest -strategy=neovim<CR>
+nmap <Leader>tf :TestFile --fail-fast -strategy=neovim<CR>
+" nmap <Leader>ts :TestSuite --fail-fast -strategy=neovim<CR>
+
+nnoremap <leader>qm :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>qa :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>qt :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>qw :lua require("harpoon.ui").nav_next()<CR>
+nnoremap <leader>qq :lua require("harpoon.ui").nav_next()<CR>
+
+lua <<EOF
+require("harpoon").setup({
+    menu = {
+        width = vim.api.nvim_win_get_width(0) - 180,
+    }
+})
+EOF
 
 nnoremap Q <nop>
 
@@ -66,10 +76,15 @@ match OverLength /\%81v.\+/
 let g:airline_section_b = ''
 
 let b:ale_linters = ['eslint', 'rubocop']
+let g:ale_typescript_standard_executable = 'eslint'
 let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+
+let g:ale_lint_on_text_changed = 'normal'
+let b:ale_lint_delay = 100
+
 " Write this in your vimrc file
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_on_insert_leave = 0
 
 function! s:ExecuteInShell(command)
   let command = join(map(split(a:command), 'expand(v:val)'))
@@ -105,7 +120,6 @@ map <Leader>k <Plug>(easymotion-k)
 let g:vimrubocop_rubocop_cmd = 'rubocop '
 let g:vimrubocop_config = '.rubocop.yml'
 let g:vimrubocop_keymap = 0
-nmap <Leader>q :RuboCop<CR>
 
 :command -nargs=+ Gg execute 'silent Ggrep!' <q-args> | cw | redraw!
 
@@ -118,13 +132,19 @@ autocmd FileType ruby
 lua << EOF
 require('telescope').setup{
   defaults = {
-    file_ignore_patterns = { ".git", "deps", "_build" }
+    file_ignore_patterns = { ".git", "deps", "_build", "%.csv" }
   }
 }
 EOF
 
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 set completeopt=menu,menuone,noselect
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 lua <<EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'

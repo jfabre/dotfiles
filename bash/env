@@ -4,6 +4,9 @@ PATH=/usr/local/bin:$PATH
 PATH=$PATH:/Users/jeremyfabre/Library/Python/2.7/bin
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH=$HOME/bin:$PATH
+export PATH="~/.rbenv/shims:$PATH"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # node
 #PATH="/usr/local/n/versions/node/10.13.0/bin:$PATH"
@@ -16,7 +19,7 @@ export EDITOR="nvim"
 export GIT_EDITOR="nvim"
 export PGHOST="localhost"
 export PGPORT="5432"
-export PGDATABASE="sheet_dev"
+export PGDATABASE="dreeven_dev"
 export PGUSER="postgres"
 export PGPASSWORD="docker"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
