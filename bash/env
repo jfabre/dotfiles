@@ -16,7 +16,7 @@ export EDITOR="nvim"
 export GIT_EDITOR="nvim"
 export PGHOST="localhost"
 export PGPORT="5432"
-export PGDATABASE="lexop_development"
+export PGDATABASE="sheet_dev"
 export PGUSER="postgres"
 export PGPASSWORD="docker"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -50,3 +50,6 @@ if [ -e /usr/share/terminfo/x/xterm-256color ]; then
 else
   export TERM='xterm-color'
 fi
+
+
+export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"

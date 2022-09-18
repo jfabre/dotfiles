@@ -19,6 +19,9 @@ alias ss='screenshot'
 alias rdm='rails db:migrate'
 alias rdr='rails db:rollback'
 
+
+alias mps='mix phx.server'
+
 #adding aliases for bundle
 alias be='bundle exec'
 alias bi='bundle install'
@@ -82,4 +85,5 @@ alias rbc='git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubo
 alias ssho='ssh jeremy@outside'
 alias sshi='ssh jeremy@inside'
 alias socat6060='sudo socat tcp-listen:80,reuseaddr,fork tcp:localhost:6060'
+alias vim="nvim"
 alias vimdiff='nvim -d'

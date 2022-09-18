@@ -14,26 +14,34 @@ Plug 'idanarye/vim-merginal'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
 Plug 'ngmy/vim-rubocop'
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'vim-test/vim-test'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'dense-analysis/ale'
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'nvim-lua/completion-nvim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+
 Plug 'rhysd/committia.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'commit' : '2c573b9d12f421cec74a215f79b25591fe083352'}
+Plug 'nvim-telescope/telescope.nvim'
+" //, { 'commit' : '2c573b9d12f421cec74a215f79b25591fe083352'}
 
 set rtp+=~/.fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'elixir-editors/vim-elixir'
 
 "Colors
 "
@@ -132,4 +140,4 @@ require('telescope').setup {
 }
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
+EOF
