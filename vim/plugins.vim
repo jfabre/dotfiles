@@ -1,8 +1,8 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
+"
 call plug#begin()
-
 Plug 'junegunn/vim-easy-align'
 Plug 'preservim/nerdcommenter'
 Plug 'vim-airline/vim-airline'
@@ -47,11 +47,11 @@ Plug 'nvim-telescope/telescope.nvim'
 " //, { 'commit' : '2c573b9d12f421cec74a215f79b25591fe083352'}
 
 set rtp+=~/.fzf
+set rtp+=/home/jeremy/bin/fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'elixir-editors/vim-elixir'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'elixir-editors/vim-elixir'
 
 "Colors
 "
@@ -67,8 +67,7 @@ Plug 'cseelus/vim-colors-lucid'
 Plug 'marcopaganini/termschool-vim-theme'
 Plug 'chriskempson/base16-vim'
 
-" Required for operations modifying multiple buffers like rename.
-set hidden
+call plug#end() " Required for operations modifying multiple buffers like rename. set hidden
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
@@ -85,7 +84,6 @@ nmap <silent>K <Plug>(lcn-hover)
 nmap <silent> gd <Plug>(lcn-definition)
 nmap <silent> <F2> <Plug>(lcn-rename)
 " Initialize plugin system
-call plug#end()
 
 set completeopt=menu,menuone,noselect
 
@@ -209,4 +207,80 @@ lua <<EOF
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   require('lspconfig').tsserver.setup {}
   require('lspconfig').solargraph.setup{}
+EOF
+
+lua <<EOF
+require("harpoon").setup({
+    menu = {
+        width = vim.api.nvim_win_get_width(0) - 180,
+    }
+})
+EOF
+
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    file_ignore_patterns = { ".git", "deps", "_build", "%.csv" }
+  }
+}
+EOF
+
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['solargraph'].setup {
+    capabilities = capabilities
+  }
 EOF
