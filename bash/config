@@ -1,4 +1,8 @@
 
+function restart_blackhole {
+  sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod
+}
+
 function show_history {
   history |
   awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' |

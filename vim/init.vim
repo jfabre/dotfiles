@@ -2,7 +2,7 @@ filetype plugin on
 filetype plugin indent on
 
 " vim plug
-source ~/dotfiles/vim/plugins.vim
+source ~/dev/dotfiles/vim/plugins.vim
 
 " Or if you have Neovim >= 0.1.5
 if (has("termguicolors"))
@@ -60,6 +60,9 @@ nnoremap <leader>qt :lua require("harpoon.term").gotoTerminal(1)<CR>
 nnoremap <leader>qw :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <leader>qq :lua require("harpoon.ui").nav_next()<CR>
 
+:lua require('leap').set_default_keymaps()
+
+nnoremap <leader>js :%!jq -S<CR>
 nnoremap Q <nop>
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -101,11 +104,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " MacOSX/Linux
 
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
+" nmap s <Plug>(easymotion-overwin-f2)
 
 " JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
 
 let g:vimrubocop_rubocop_cmd = 'rubocop '
 let g:vimrubocop_config = '.rubocop.yml'
@@ -128,4 +131,4 @@ smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
-colors base16-embers
+colors base16-rebecca

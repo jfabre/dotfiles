@@ -10,7 +10,10 @@ Plug 'kevinhui/vim-docker-tools'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'airblade/vim-gitgutter'
+Plug 'ggandor/leap.nvim'
+Plug 'tpope/vim-repeat'
 
+Plug 'psliwka/vim-smoothie'
 Plug 'idanarye/vim-merginal'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
@@ -44,7 +47,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-telescope/telescope.nvim'
-" //, { 'commit' : '2c573b9d12f421cec74a215f79b25591fe083352'}
+Plug 'nvim-telescope/telescope-media-files.nvim'
 
 set rtp+=~/.fzf
 set rtp+=/home/jeremy/bin/fzf
@@ -137,6 +140,7 @@ require('telescope').setup {
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('media_files')
 EOF
 
 lua <<EOF
