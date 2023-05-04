@@ -65,8 +65,8 @@ nnoremap <leader>qq :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <leader>js :%!jq -S<CR>
 nnoremap Q <nop>
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%121v.\+/
 
 let g:airline_section_b = ''
 
@@ -131,4 +131,5 @@ smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
-colors base16-rebecca
+" colors tokyonight-night
+colors kanagawa-dragon

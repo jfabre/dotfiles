@@ -43,7 +43,8 @@ alias tm='top -o vsize'
 
 # git
 alias g='git status'
-alias gl='git smart-log -n 150'
+# alias gl='git log --pretty=oneline --graph --decorate'
+alias gl='git smart-log'
 alias gpl='git smart-pull'
 alias gps='git push'
 alias gc='git commit'
