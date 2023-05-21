@@ -1,3 +1,5 @@
+#!bin/bash
+
 export PATH=$PATH:$HOME/dev/dotfiles/commands
 PATH=$PATH:/usr/libexec/java_home
 PATH=/usr/local/bin:$PATH

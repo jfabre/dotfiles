@@ -1,3 +1,5 @@
+#!bin/bash
+
 alias reload='source ~/.zshrc'
 
 #rails
@@ -15,6 +17,7 @@ alias rt8='PARALLEL_WORKERS=8 rails test'
 alias rt10='PARALLEL_WORKERS=10 rails test'
 alias rts='PARALLEL_WORKERS=1 TEST_USE_FIXTURES=true HEADLESS=true rails test'
 alias ss='screenshot'
+alias tt='bundle exec turbo_tests -n 6'
 
 alias rdm='rails db:migrate'
 alias rdr='rails db:rollback'
@@ -44,7 +47,7 @@ alias tm='top -o vsize'
 # git
 alias g='git status'
 # alias gl='git log --pretty=oneline --graph --decorate'
-alias gl='git smart-log'
+alias gl='git adog'
 alias gpl='git smart-pull'
 alias gps='git push'
 alias gc='git commit'

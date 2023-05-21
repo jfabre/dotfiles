@@ -2,6 +2,9 @@ filetype plugin on
 filetype plugin indent on
 
 " vim plug
+lua <<EOF
+  vim.loader.enable();
+EOF
 source ~/dev/dotfiles/vim/plugins.vim
 
 " Or if you have Neovim >= 0.1.5
@@ -70,15 +73,6 @@ nnoremap Q <nop>
 
 let g:airline_section_b = ''
 
-let b:ale_linters = ['eslint', 'rubocop']
-let g:ale_typescript_standard_executable = 'eslint'
-let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '.'
-
-let g:ale_lint_on_text_changed = 'normal'
-let b:ale_lint_delay = 100
-
 " Write this in your vimrc file
 
 function! s:ExecuteInShell(command)
@@ -110,17 +104,14 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " MacOSX/Linux
 " map <Leader>j <Plug>(easymotion-j)
 " map <Leader>k <Plug>(easymotion-k)
 
-let g:vimrubocop_rubocop_cmd = 'rubocop '
-let g:vimrubocop_config = '.rubocop.yml'
-let g:vimrubocop_keymap = 0
-
 :command -nargs=+ Gg execute 'silent Ggrep!' <q-args> | cw | redraw!
 
 autocmd FileType ruby
     \ set foldmethod=expr |
     \ set foldexpr=getline(v:lnum)=~'^\\s*#'
 
-:2mat ErrorMsg '\%81v.'
+" Prints character 121 in red, not 120
+:2mat ErrorMsg '\%121v.'
 
 " Expand
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
