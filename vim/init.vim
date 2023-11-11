@@ -71,7 +71,7 @@ nnoremap Q <nop>
 nnoremap gn :bnext <CR>
 nnoremap gb :bprevious <CR>
 
-autocmd BufNewFile,BufRead Jenkinsfile setfiletype groovy
+" autocmd BufNewFile,BufRead Jenkinsfile setfiletype groovy
 
 " highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%121v.\+/
@@ -118,7 +118,7 @@ autocmd FileType ruby
 " Prints character 121 in red, not 120
 :2mat ErrorMsg '\%121v.'
 
-set shellcmdflag=-ic
+set shellcmdflag=-c
 
 " Expand
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -129,7 +129,7 @@ smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
-hi! Normal ctermbg=NONE guibg=NONE
+" hi! Normal ctermbg=NONE guibg=NONE
 " hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 " hi! Normal ctermbg=NONE guibg=NONE
 set noshowmode
@@ -137,7 +137,7 @@ set noshowmode
 " colors tokyonight-night
 " colors kanagawa-dragon
 let g:lightline = { 'colorscheme': 'catppuccin', }
-colors catppuccin-frappe " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+colors catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
-highlight Normal ctermbg=none guibg=none
-highlight NonText ctermbg=none guibg=none
+" highlight Normal ctermbg=none guibg=none
+" highlight NonText ctermbg=none guibg=none
