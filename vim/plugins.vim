@@ -5,7 +5,8 @@
 call plug#begin()
 Plug 'junegunn/vim-easy-align'
 Plug 'preservim/nerdcommenter'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'kevinhui/vim-docker-tools'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
@@ -68,6 +69,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'nordtheme/vim'
 Plug 'rebelot/kanagawa.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 call plug#end() " Required for operations modifying multiple buffers like rename. set hidden
 

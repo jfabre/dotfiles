@@ -68,10 +68,15 @@ nnoremap <leader>qq :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <leader>js :%!jq -S<CR>
 nnoremap Q <nop>
 
+nnoremap gb :bp<CR>
+nnoremap gn :bn<CR>
+
+autocmd BufNewFile,BufRead Jenkinsfile setfiletype groovy
+
 " highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%121v.\+/
 
-let g:airline_section_b = ''
+" let g:airline_section_b = ''
 
 " Write this in your vimrc file
 
@@ -113,6 +118,8 @@ autocmd FileType ruby
 " Prints character 121 in red, not 120
 :2mat ErrorMsg '\%121v.'
 
+set shellcmdflag=-ic
+
 " Expand
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 set completeopt=menu,menuone,noselect
@@ -122,5 +129,13 @@ smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
+hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+" hi! Normal ctermbg=NONE guibg=NONE
+set noshowmode
+
 " colors tokyonight-night
-colors kanagawa-dragon
+" let g:lightline = { 'colorscheme': 'kanagawa-dragon', }
+" colors kanagawa-dragon
+let g:lightline = { 'colorscheme': 'catppuccin', }
+colors catppuccin-frappe " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
