@@ -54,8 +54,8 @@ nnoremap <leader>z :Git blame<Cr>
 
 let test#neovim#term_position = "vert topleft 120"
 nmap <Leader>te :TestNearest -strategy=neovim<CR>
-nmap <Leader>tf :TestFile --fail-fast -strategy=neovim<CR>
-" nmap <Leader>ts :TestSuite --fail-fast -strategy=neovim<CR>
+nmap <Leader>tf :TestFile -strategy=neovim<CR>
+" nmap <Leader>ts :TestSuite -strategy=neovim<CR>
 
 nnoremap <leader>qm :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <leader>qa :lua require("harpoon.mark").add_file()<CR>
@@ -68,8 +68,8 @@ nnoremap <leader>qq :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <leader>js :%!jq -S<CR>
 nnoremap Q <nop>
 
-nnoremap gb :bp<CR>
-nnoremap gn :bn<CR>
+nnoremap gn :bnext <CR>
+nnoremap gb :bprevious <CR>
 
 autocmd BufNewFile,BufRead Jenkinsfile setfiletype groovy
 
@@ -135,7 +135,9 @@ hi! Normal ctermbg=NONE guibg=NONE
 set noshowmode
 
 " colors tokyonight-night
-" let g:lightline = { 'colorscheme': 'kanagawa-dragon', }
 " colors kanagawa-dragon
 let g:lightline = { 'colorscheme': 'catppuccin', }
 colors catppuccin-frappe " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+
+highlight Normal ctermbg=none guibg=none
+highlight NonText ctermbg=none guibg=none

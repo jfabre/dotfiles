@@ -21,7 +21,7 @@ export EDITOR="nvim"
 export GIT_EDITOR="nvim"
 export PGHOST="localhost"
 export PGPORT="5432"
-export PGDATABASE="dreeven_dev"
+export PGDATABASE="sheet_dev"
 export PGUSER="postgres"
 export PGPASSWORD="docker"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -43,8 +43,7 @@ export SIDEKIQ_INLINE=false
 export GOPATH=~/go
 export GO111MODULE=on
 
-export DATABASE_SOURCE="lexop_development"
-
+export DATABASE_SOURCE="sheet_dev"
 export DATABASE_DESTINATION='anon'
 export DATABASE_HOST='127.0.0.1'
 export DATABASE_PASSWORD='docker'
@@ -58,3 +57,7 @@ fi
 
 
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
+
+export FLYCTL_INSTALL="/home/jeremy/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+

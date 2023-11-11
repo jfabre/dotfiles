@@ -42,8 +42,8 @@ function start_agent {
 
 # Source SSH settings, if applicable
 # just for macos, we don't care
-eval $(ssh-agent)
-ssh-add --apple-use-keychain ~/.ssh/id_rsa
+# eval $(ssh-agent)
+# ssh-add --apple-use-keychain ~/.ssh/id_rsa
 
 function play {
   # Skip DASH manifest for speed purposes. This might actually disable

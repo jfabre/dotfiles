@@ -23,7 +23,7 @@ Plug 'kaplanz/nvim-retrail'
 
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
@@ -122,19 +122,7 @@ local lsp = require('lsp-zero').preset({
 
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
-
 lsp.setup()
--- require'nvim-treesitter.configs'.setup {
---   incremental_selection = {
---     enable = true,
---     keymaps = {
---      init_selection = "gnn",
---      node_incremental = "grn",
---      scope_incremental = "grc",
---      node_decremental = "grm",
---   },
---  },
---}
 EOF
 
 lua <<EOF
